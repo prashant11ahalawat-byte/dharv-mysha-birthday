@@ -1,0 +1,1151 @@
+/* ==========================================================================
+   CINEMATIC MOVIE PARTY THEME
+   For Dharv Pratap (6) & Mysha (9)
+   Palette: Deep Midnight Purple, Cream Ticket, Gold & Coral Accents
+   ========================================================================== */
+
+:root {
+  --bg-deep: #0c071e;
+  --bg-surface: #170f35;
+  --bg-surface-elevated: #23164c;
+  --ticket-cream: #fffcf4;
+  --ticket-cream-alt: #f8f2e2;
+  --ticket-border: #e8d9bc;
+  
+  --gold-primary: #f5a623;
+  --gold-bright: #ffc83b;
+  --gold-glow: rgba(255, 200, 59, 0.4);
+  --gold-dark: #8c5d0f;
+  
+  --coral-accent: #ff5364;
+  --coral-glow: rgba(255, 83, 100, 0.35);
+  
+  --dharv-blue-dark: #0f1f4b;
+  --dharv-blue-mid: #1d4ed8;
+  --dharv-blue-glow: #38bdf8;
+  
+  --mysha-pink-dark: #4a0428;
+  --mysha-pink-mid: #be185d;
+  --mysha-pink-glow: #f472b6;
+  
+  --text-dark: #1f1b2e;
+  --text-muted: #5a546d;
+  --text-light: #fefeff;
+  --text-light-muted: #cbd5e1;
+  
+  --font-display: 'Impact', 'Montserrat', 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  --shadow-ticket: 0 24px 60px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 4px 20px var(--gold-glow);
+  --radius-ticket: 20px;
+  --radius-card: 16px;
+  --radius-btn: 30px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(190, 24, 93, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(29, 78, 216, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(245, 166, 35, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at top, #1c103e 0%, var(--bg-deep) 70%);
+  background-attachment: fixed;
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   MARQUEE BANNER
+   ========================================================================== */
+.marquee-bar {
+  background: linear-gradient(90deg, #1b0c36, #2d1454, #1b0c36);
+  border-bottom: 2px solid var(--gold-primary);
+  color: var(--gold-bright);
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: scrollMarquee 26s linear infinite;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marquee-star {
+  color: var(--gold-primary);
+  text-shadow: 0 0 8px var(--gold-bright);
+  font-size: 1.1rem;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   PAGE CONTAINER & FILM STRIP
+   ========================================================================== */
+.page-wrapper {
+  max-width: 960px;
+  margin: 30px auto 60px;
+  padding: 0 16px;
+  position: relative;
+}
+
+/* Film Strip Accents */
+.film-strip-edge {
+  height: 20px;
+  background-color: #12092a;
+  border: 1px solid rgba(255, 200, 59, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.film-holes {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.hole {
+  width: 14px;
+  height: 10px;
+  background-color: var(--bg-deep);
+  border: 1px solid rgba(255, 200, 59, 0.2);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   MAIN MOVIE TICKET CARD
+   ========================================================================== */
+.ticket-container {
+  background: var(--ticket-cream);
+  color: var(--text-dark);
+  border-radius: var(--radius-ticket);
+  box-shadow: var(--shadow-ticket);
+  border: 2px solid var(--ticket-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Golden Ticket Header Band */
+.ticket-top-band {
+  background: linear-gradient(135deg, #2b184f 0%, #170d35 100%);
+  color: var(--text-light);
+  padding: 34px 24px 28px;
+  text-align: center;
+  border-bottom: 4px double var(--gold-primary);
+  position: relative;
+}
+
+.ticket-top-band::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--coral-accent), var(--gold-bright), var(--dharv-blue-glow), var(--mysha-pink-glow));
+}
+
+.ticket-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ticket-kicker span {
+  display: inline-block;
+}
+
+.ticket-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  color: #fff;
+  text-shadow: 
+    3px 3px 0px #b45309,
+    6px 6px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 14px;
+}
+
+.ticket-title .highlight {
+  color: var(--gold-bright);
+  display: inline-block;
+  background: linear-gradient(to bottom, #fff5c0, #f5a623);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+}
+
+.ticket-tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-style: italic;
+  color: #fce7f3;
+  max-width: 680px;
+  margin: 0 auto 16px;
+  line-height: 1.45;
+}
+
+.emoji-reel {
+  font-size: 1.6rem;
+  letter-spacing: 14px;
+  padding-left: 14px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* ==========================================================================
+   TICKET BODY CONTENT
+   ========================================================================== */
+.ticket-body {
+  padding: 36px 32px 24px;
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, #fffdf8 0%, var(--ticket-cream) 100%);
+}
+
+/* ==========================================================================
+   SIDE-BY-SIDE STAR POSTER CARDS
+   ========================================================================== */
+.stars-section {
+  margin-bottom: 36px;
+}
+
+.stars-section-title {
+  text-align: center;
+  font-family: var(--font-display);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.stars-section-title::before,
+.stars-section-title::after {
+  content: '';
+  height: 2px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, var(--ticket-border), transparent);
+}
+
+.stars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.star-card {
+  border-radius: var(--radius-card);
+  padding: 28px 22px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  border: 3px solid;
+}
+
+.star-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Dharv Card - Blue */
+.star-card.dharv {
+  background: linear-gradient(145deg, #1e3a8a 0%, #172554 100%);
+  border-color: #60a5fa;
+}
+
+.star-card.dharv .card-glow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Mysha Card - Pink */
+.star-card.mysha {
+  background: linear-gradient(145deg, #be185d 0%, #700735 100%);
+  border-color: #f472b6;
+}
+
+.star-card.mysha .card-glow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.star-badge-ribbon {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.star-number-badge {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  background: radial-gradient(circle at 35% 35%, #fff5c0, #f5a623 60%, #b45309 100%);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.star-age-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: #3e2205;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.star-card-name {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.star-card-role {
+  font-size: 1.05rem;
+  color: #fed7aa;
+  font-family: var(--font-serif);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.star-card-turning {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   2x2 DETAILS GRID
+   ========================================================================== */
+.details-section {
+  margin-bottom: 32px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.detail-item {
+  background: #fff;
+  border: 1px solid var(--ticket-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.detail-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-primary);
+}
+
+.detail-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--ticket-cream-alt);
+  border: 1px solid var(--ticket-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.detail-content {
+  flex: 1;
+}
+
+.detail-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.detail-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   PROMINENT PARENTS NOTE BANNER
+   ========================================================================== */
+.parents-banner {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 2px dashed #f97316;
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.12);
+}
+
+.parents-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+.parents-heading {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9a3412;
+  margin-bottom: 4px;
+}
+
+.parents-body {
+  font-size: 1.05rem;
+  color: #7c2d12;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   LIVE COUNTDOWN TIMER
+   ========================================================================== */
+.countdown-box {
+  background: linear-gradient(135deg, #1f1238 0%, #110924 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 22px 20px;
+  text-align: center;
+  margin-bottom: 36px;
+  border: 1px solid var(--gold-dark);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.countdown-title {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.countdown-digits {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.count-unit {
+  background: #281747;
+  border: 1px solid rgba(255, 200, 59, 0.3);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 76px;
+}
+
+.count-number {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 200, 59, 0.5);
+}
+
+.count-label {
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light-muted);
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   PERFORATED TICKET TEAR LINE & NOTCHES
+   ========================================================================== */
+.perforation-divider {
+  position: relative;
+  margin: 10px -32px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perforation-line {
+  width: 100%;
+  border-top: 3px dashed #baa485;
+  position: relative;
+}
+
+.perforation-notch-left,
+.perforation-notch-right {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-color: var(--bg-deep);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid var(--ticket-border);
+  z-index: 10;
+}
+
+.perforation-notch-left {
+  left: -16px;
+  box-shadow: inset -4px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.perforation-notch-right {
+  right: -16px;
+  box-shadow: inset 4px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.tear-indicator {
+  position: absolute;
+  background: var(--ticket-cream);
+  padding: 0 14px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8c7355;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   TICKET STUB FOOTER
+   ========================================================================== */
+.ticket-stub {
+  background: var(--ticket-cream-alt);
+  border: 2px solid var(--ticket-border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 32px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.stub-admit-badge {
+  display: inline-block;
+  background: #170f35;
+  color: var(--gold-bright);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  border-radius: 30px;
+  border: 2px solid var(--gold-primary);
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.stub-reminder {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   RSVP FORM SECTION
+   ========================================================================== */
+.rsvp-section {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid var(--ticket-border);
+  padding: 32px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rsvp-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.rsvp-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #170d35;
+  margin-bottom: 6px;
+}
+
+.rsvp-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Toggle attendance radio buttons */
+.attendance-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.attendance-option {
+  position: relative;
+}
+
+.attendance-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.attendance-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 14px;
+  background: var(--ticket-cream-alt);
+  border: 2px solid var(--ticket-border);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+  font-weight: 700;
+}
+
+.attendance-option input[type="radio"]:checked + .attendance-label {
+  border-color: #16a34a;
+  background: #f0fdf4;
+  color: #15803d;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);
+}
+
+.attendance-option.decline input[type="radio"]:checked + .attendance-label {
+  border-color: #dc2626;
+  background: #fef2f2;
+  color: #b91c1c;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.18);
+}
+
+.attendance-icon {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.attendance-text {
+  font-size: 1.05rem;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.form-label .required-star {
+  color: var(--coral-accent);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Guest Counters Grid */
+.guest-counts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.guest-stepper-wrap {
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stepper-btn {
+  background: #e5e7eb;
+  border: none;
+  color: #374151;
+  font-size: 1.3rem;
+  font-weight: bold;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+.stepper-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepper-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  -moz-appearance: textfield;
+}
+
+.stepper-input::-webkit-outer-spin-button,
+.stepper-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Total Guest Summary Pill */
+.guest-summary-pill {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Form Error Banner */
+.form-feedback {
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.form-feedback.error {
+  display: block;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  color: #991b1b;
+}
+
+.form-feedback.success {
+  display: block;
+  background: #f0fdf4;
+  border: 1px solid #4ade80;
+  color: #166534;
+}
+
+/* Submit Button */
+.btn-submit-rsvp {
+  width: 100%;
+  padding: 16px 28px;
+  border: none;
+  border-radius: var(--radius-btn);
+  background: linear-gradient(135deg, #f5a623 0%, #ea580c 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-submit-rsvp:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(234, 88, 12, 0.45);
+  filter: brightness(1.05);
+}
+
+.btn-submit-rsvp:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-submit-rsvp:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner inside button */
+.btn-spinner {
+  display: none;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.btn-submit-rsvp.loading .btn-spinner {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Confirmation Success Card */
+.rsvp-success-card {
+  display: none;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 16px;
+  padding: 36px 24px;
+  text-align: center;
+}
+
+.rsvp-success-card.active {
+  display: block;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-icon-wrap {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.success-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: #14532d;
+  margin-bottom: 10px;
+}
+
+.success-body {
+  font-size: 1.15rem;
+  color: #166534;
+  max-width: 540px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+}
+
+.success-summary-box {
+  background: #fff;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  max-width: 440px;
+  margin: 0 auto 24px;
+  text-align: left;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #16a34a;
+  color: #16a34a;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* ==========================================================================
+   PRINT / ACTION BUTTONS & SMALL FOOTER
+   ========================================================================== */
+.page-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.btn-print {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-print:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--gold-bright);
+}
+
+.small-footer {
+  text-align: center;
+  padding: 40px 16px 20px;
+  font-size: 0.95rem;
+  color: var(--text-light-muted);
+}
+
+.small-footer .heart {
+  color: #ff5364;
+  display: inline-block;
+  animation: pulse 1.8s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE ADAPTATIONS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .page-wrapper {
+    margin-top: 15px;
+    padding: 0 10px;
+  }
+  
+  .ticket-top-band {
+    padding: 24px 16px 20px;
+  }
+  
+  .ticket-body {
+    padding: 24px 16px 20px;
+  }
+  
+  /* Stack side-by-side star cards on mobile */
+  .stars-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  
+  /* Stack 2x2 details grid into 1 column on mobile */
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  
+  .perforation-divider {
+    margin: 10px -16px 24px;
+  }
+  
+  .parents-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 16px;
+  }
+  
+  .guest-counts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .countdown-digits {
+    gap: 8px;
+  }
+  
+  .count-unit {
+    min-width: 65px;
+    padding: 8px 10px;
+  }
+  
+  .count-number {
+    font-size: 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .marquee-track {
+    animation: none;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

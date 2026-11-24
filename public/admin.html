@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Office Admin — Dharv & Mysha's Movie Party</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. PIN AUTHENTICATION GATE
+       ==================================================================== -->
+  <section id="pin-login-gate" class="pin-login-container" aria-label="Admin PIN Login">
+    <div class="pin-login-card">
+      <div class="pin-icon" aria-hidden="true">🎟️</div>
+      <h1 class="pin-title">Box Office Login</h1>
+      <p class="pin-sub">Enter the numeric host PIN to view guest RSVPs and party metrics.</p>
+
+      <div id="pin-error" class="pin-error-banner" role="alert" aria-live="polite"></div>
+
+      <form id="pin-form" autocomplete="off">
+        <div class="pin-input-group">
+          <label for="admin-pin-input" class="sr-only">Numeric Admin PIN</label>
+          <input 
+            type="password" 
+            id="admin-pin-input" 
+            name="pin" 
+            class="pin-input" 
+            placeholder="••••" 
+            inputmode="numeric" 
+            pattern="[0-9]*" 
+            maxlength="10" 
+            required 
+            autofocus
+          >
+        </div>
+
+        <button type="submit" id="btn-pin-submit" class="btn-pin-submit">
+          Unlock Box Office
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. ADMIN DASHBOARD
+       ==================================================================== -->
+  <main id="admin-dashboard" class="admin-dashboard-container" aria-label="Box Office Dashboard">
+    
+    <!-- Top Header & Actions -->
+    <header class="admin-header">
+      <div class="admin-title-wrap">
+        <span class="admin-logo-icon" aria-hidden="true">🎬</span>
+        <div>
+          <h1 class="admin-heading">Box Office <span>Dashboard</span></h1>
+          <p class="admin-subheading">Dharv Pratap (6) &amp; Mysha (9) • 10 Dec 2026 • PVR Cinemas, Forum Nexus Mall</p>
+        </div>
+      </div>
+
+      <div class="admin-header-actions">
+        <button type="button" id="btn-refresh-data" class="btn-admin" title="Reload RSVPs from database">
+          <span aria-hidden="true">🔄</span>
+          <span>Refresh</span>
+        </button>
+        <button type="button" id="btn-export-csv" class="btn-admin gold" title="Download all RSVPs as a CSV spreadsheet">
+          <span aria-hidden="true">📥</span>
+          <span>Export CSV</span>
+        </button>
+        <button type="button" id="btn-logout" class="btn-admin danger" title="Lock Box Office">
+          <span aria-hidden="true">🔒</span>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- METRICS SUMMARY STATS CARDS -->
+    <section class="metrics-grid" aria-label="Event Attendance Summary">
+      
+      <!-- Families Going -->
+      <article class="stat-card accent-green">
+        <div class="stat-label">Families Going</div>
+        <div class="stat-value" id="stat-families-going">0</div>
+        <div class="stat-sub">Attending groups</div>
+      </article>
+
+      <!-- Total Guests Coming -->
+      <article class="stat-card accent-gold">
+        <div class="stat-label">Total Guests Coming</div>
+        <div class="stat-value" id="stat-total-guests">0</div>
+        <div class="stat-sub">Adults + Kids attending</div>
+      </article>
+
+      <!-- Adults -->
+      <article class="stat-card accent-blue">
+        <div class="stat-label">Adults</div>
+        <div class="stat-value" id="stat-adults">0</div>
+        <div class="stat-sub">Grown-ups attending</div>
+      </article>
+
+      <!-- Kids -->
+      <article class="stat-card accent-pink">
+        <div class="stat-label">Kids</div>
+        <div class="stat-value" id="stat-kids">0</div>
+        <div class="stat-sub">Kids on the big screen!</div>
+      </article>
+
+      <!-- Can't Make It -->
+      <article class="stat-card accent-red">
+        <div class="stat-label">Can't Make It</div>
+        <div class="stat-value" id="stat-cant-make-it">0</div>
+        <div class="stat-sub">Regrets received</div>
+      </article>
+
+      <!-- Total Responses -->
+      <article class="stat-card accent-purple">
+        <div class="stat-label">Total Responses</div>
+        <div class="stat-value" id="stat-total-responses">0</div>
+        <div class="stat-sub">All submissions</div>
+      </article>
+
+    </section>
+
+    <!-- GUEST LIST TABLE PANEL -->
+    <section class="table-panel" aria-label="Guest List Table">
+      
+      <!-- Table Controls Toolbar -->
+      <div class="table-toolbar">
+        <div class="search-input-wrap">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input 
+            type="search" 
+            id="search-guests-input" 
+            class="search-input" 
+            placeholder="Search by name, phone, or wish..." 
+            aria-label="Filter guest list"
+          >
+        </div>
+        <div id="search-status-info" class="table-status-info" aria-live="polite">Loading guests...</div>
+      </div>
+
+      <!-- Responsive Table -->
+      <div class="table-responsive">
+        <table class="guest-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Adults</th>
+              <th scope="col">Kids</th>
+              <th scope="col">Total</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Wishes / Message</th>
+              <th scope="col">Submitted At</th>
+              <th scope="col" style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="guest-table-body">
+            <!-- Populated dynamically by admin.js with strict XSS escaping -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Script -->
+  <script src="js/admin.js"></script>
+</body>
+</html>

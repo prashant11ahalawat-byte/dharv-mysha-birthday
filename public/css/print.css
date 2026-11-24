@@ -1,0 +1,178 @@
+/* ==========================================================================
+   PRINT STYLESHEET
+   Optimized for saving as PDF or printing physical invitation cards
+   ========================================================================== */
+
+@media print {
+  *, *::before, *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt;
+    line-height: 1.35;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide interactive web-only elements */
+  .marquee-bar,
+  .countdown-box,
+  .rsvp-section,
+  .page-actions,
+  #confetti-canvas,
+  .film-strip-edge {
+    display: none !important;
+  }
+
+  .page-wrapper {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ticket-container {
+    background: #fffcf4 !important;
+    border: 2pt solid #d4af37 !important;
+    border-radius: 12pt !important;
+    page-break-inside: avoid;
+    overflow: visible !important;
+  }
+
+  .ticket-top-band {
+    background: #170d35 !important;
+    color: #ffffff !important;
+    padding: 20pt 16pt 16pt !important;
+    border-bottom: 3pt double #d4af37 !important;
+  }
+
+  .ticket-title {
+    color: #ffffff !important;
+    font-size: 24pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  .ticket-title .highlight {
+    color: #ffd700 !important;
+    -webkit-text-fill-color: initial !important;
+  }
+
+  .ticket-tagline {
+    color: #fce7f3 !important;
+    font-size: 11pt !important;
+    margin-bottom: 8pt !important;
+  }
+
+  .ticket-body {
+    padding: 18pt 20pt 14pt !important;
+    background: #fffcf4 !important;
+  }
+
+  .stars-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14pt !important;
+    margin-bottom: 18pt !important;
+  }
+
+  .star-card {
+    border-radius: 8pt !important;
+    padding: 14pt !important;
+    border: 2pt solid !important;
+    page-break-inside: avoid;
+  }
+
+  .star-card.dharv {
+    background: #1e3a8a !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+  }
+
+  .star-card.mysha {
+    background: #be185d !important;
+    border-color: #ec4899 !important;
+    color: #ffffff !important;
+  }
+
+  .star-number-badge {
+    background: #f59e0b !important;
+    width: 50pt !important;
+    height: 50pt !important;
+    border: 2pt solid #ffffff !important;
+    margin-bottom: 8pt !important;
+  }
+
+  .star-age-num {
+    font-size: 24pt !important;
+    color: #ffffff !important;
+  }
+
+  .star-card-name {
+    font-size: 16pt !important;
+    color: #ffffff !important;
+  }
+
+  .details-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .detail-item {
+    background: #ffffff !important;
+    border: 1pt solid #e5e7eb !important;
+    padding: 10pt !important;
+    border-radius: 6pt !important;
+  }
+
+  .parents-banner {
+    background: #fff7ed !important;
+    border: 1.5pt dashed #ea580c !important;
+    padding: 12pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .parents-heading {
+    color: #9a3412 !important;
+  }
+
+  .parents-body {
+    color: #7c2d12 !important;
+  }
+
+  .perforation-line {
+    border-top: 1.5pt dashed #9ca3af !important;
+  }
+
+  .perforation-notch-left,
+  .perforation-notch-right {
+    display: none !important;
+  }
+
+  .ticket-stub {
+    background: #f8fafc !important;
+    border: 1.5pt solid #cbd5e1 !important;
+    padding: 14pt !important;
+    border-radius: 8pt !important;
+  }
+
+  .stub-admit-badge {
+    background: #1e1b4b !important;
+    color: #ffd700 !important;
+    border: 1pt solid #ffd700 !important;
+    font-size: 11pt !important;
+    padding: 4pt 16pt !important;
+  }
+
+  .small-footer {
+    color: #6b7280 !important;
+    padding-top: 10pt !important;
+  }
+}
