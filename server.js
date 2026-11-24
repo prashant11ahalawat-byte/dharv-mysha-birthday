@@ -375,12 +375,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start Server
-app.listen(config.PORT, () => {
+// Health check for Render / Cloud hosts
+app.get('/healthz', (req, res) => res.status(200).send('OK'));
+app.get('/health', (req, res) => res.status(200).send('OK'));
+
+// Start Server listening on 0.0.0.0
+const HOST = '0.0.0.0';
+app.listen(config.PORT, HOST, () => {
   console.log(`====================================================`);
   console.log(`🎬 Birthday Party RSVP Website is running!`);
-  console.log(`🍿 Public Invitation: http://localhost:${config.PORT}/`);
-  console.log(`🎟️ Admin Portal:      http://localhost:${config.PORT}/admin`);
+  console.log(`🍿 Public Invitation: http://${HOST}:${config.PORT}/`);
+  console.log(`🎟️ Admin Portal:      http://${HOST}:${config.PORT}/admin`);
   console.log(`🔑 Configured Admin PIN: [${config.ADMIN_PIN}] (set via ADMIN_PIN env var)`);
   console.log(`====================================================`);
 });
