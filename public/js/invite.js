@@ -1,22 +1,37 @@
 /**
  * Public Invitation & RSVP Interactivity
- * Handles live countdown, guest counters, RSVP form validation, and submission
+ * PVR Playhouse Theme: Countdown, Web Audio Music, Confetti, Steppers, WhatsApp Sharing & RSVP submission
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initial Welcoming Confetti Sparkle
+  // 1. Initial Confetti Sparkle
   if (window.PartyConfetti) {
     setTimeout(() => {
       window.PartyConfetti.sparkle();
-    }, 600);
+    }, 700);
   }
 
   // 2. Countdown Timer
   initCountdown();
 
-  // 3. RSVP Form Interactivity
+  // 3. Music Player (Default ON + Autoplay)
+  if (window.PartyMusic) {
+    window.PartyMusic.setupAutoplay();
+  }
+  initMusicControls();
+
+  // 4. Floating Birthday Wishes Stream
+  initFloatingWishes();
+
+  // 5. Party Popper Button
+  initPartyPopper();
+
+  // 6. WhatsApp & Native Share Button
+  initShareButton();
+
+  // 7. RSVP Form Interactivity
   initRSVPForm();
 
-  // 4. Print Button
+  // 8. Print Button
   const printBtn = document.getElementById('btn-print-invite');
   if (printBtn) {
     printBtn.addEventListener('click', () => {
@@ -24,6 +39,117 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/**
+ * Music Toggle Button
+ */
+function initMusicControls() {
+  const musicBtn = document.getElementById('btn-toggle-music');
+  const musicLabel = document.getElementById('music-btn-label');
+
+  if (!musicBtn || !window.PartyMusic) return;
+
+  musicBtn.addEventListener('click', () => {
+    const isNowPlaying = window.PartyMusic.toggle();
+    if (isNowPlaying) {
+      musicBtn.classList.add('playing');
+      if (musicLabel) musicLabel.textContent = 'Music: ON';
+    } else {
+      musicBtn.classList.remove('playing');
+      if (musicLabel) musicLabel.textContent = 'Music: OFF';
+    }
+  });
+}
+
+/**
+ * Floating Birthday Wishes Marquee at the bottom of the screen
+ */
+async function initFloatingWishes() {
+  const track = document.getElementById('wishes-marquee-track');
+  if (!track) return;
+
+  try {
+    const res = await fetch('/api/wishes');
+    const data = await res.json();
+    const wishes = data.wishes || [];
+    renderFloatingWishes(wishes);
+  } catch (err) {
+    console.error('Failed to load wishes:', err);
+  }
+}
+
+function renderFloatingWishes(wishes) {
+  const track = document.getElementById('wishes-marquee-track');
+  if (!track) return;
+
+  if (wishes.length === 0) {
+    track.innerHTML = `
+      <div class="wish-item">
+        <span class="wish-author">🎉 Welcome:</span>
+        <span class="wish-msg">Leave a birthday wish for Dharv & Mysha below!</span>
+      </div>
+    `;
+    return;
+  }
+
+  // Duplicate list so scrolling is seamless and infinite
+  const items = [...wishes, ...wishes].map(w => `
+    <div class="wish-item">
+      <span class="wish-avatar" aria-hidden="true">💬</span>
+      <strong class="wish-author">${escapeHTML(w.name)}:</strong>
+      <span class="wish-msg">"${escapeHTML(w.message)}"</span>
+      <span class="wish-star" aria-hidden="true">★</span>
+    </div>
+  `).join('');
+
+  track.innerHTML = items;
+}
+
+/**
+ * Clickable Party Popper Button
+ */
+function initPartyPopper() {
+  const popperBtn = document.getElementById('btn-party-popper');
+  if (!popperBtn) return;
+
+  popperBtn.addEventListener('click', () => {
+    if (window.PartyMusic && window.PartyMusic.playPopperSFX) {
+      window.PartyMusic.playPopperSFX();
+    }
+    if (window.PartyConfetti) {
+      window.PartyConfetti.celebrate();
+    }
+  });
+}
+
+/**
+ * One-Tap Share (WhatsApp & Native Web Share API)
+ */
+function initShareButton() {
+  const shareBtn = document.getElementById('btn-share-invite');
+  if (!shareBtn) return;
+
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: "🎬 Dharv & Mysha's Birthday Movie Party!",
+      text: "🍿 You're invited to Dharv (6) & Mysha's (9) Birthday Movie Party at PVR Cinemas (Playhouse), Forum Nexus Mall!\n\n📅 Date: Thursday, 10 Dec 2026 (4:30 – 7:30 PM)\n🛝 Fun includes: In-theatre Slide & Popcorn!\n\nPlease RSVP here:\n",
+      url: window.location.href
+    };
+
+    if (navigator.share && /mobile|android|iphone/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        // Fallback to WhatsApp link
+      }
+    }
+
+    // Direct WhatsApp Web / App intent fallback
+    const waText = encodeURIComponent(`${shareData.text}${shareData.url}`);
+    window.open(`https://api.whatsapp.com/send?text=${waText}`, '_blank');
+  });
+}
 
 /**
  * Live Countdown to Thursday, 10 December 2026 at 4:30 PM (16:30) IST
@@ -44,8 +170,8 @@ function initCountdown() {
     if (distance <= 0) {
       if (countdownBox) {
         countdownBox.innerHTML = `
-          <div class="countdown-title" style="font-size: 1.2rem; color: #ffc83b;">
-            🎬 SHOWTIME IS HERE! WELCOME TO THE MOVIE PARTY! 🍿
+          <div class="countdown-title" style="font-size: 1.25rem; color: #ffd43f;">
+            🎬 SHOWTIME! WELCOME TO PVR PLAYHOUSE! 🍿🛝
           </div>
         `;
       }
@@ -109,7 +235,7 @@ function initRSVPForm() {
   if (adultsInput) adultsInput.addEventListener('input', updateGuestSummary);
   if (kidsInput) kidsInput.addEventListener('input', updateGuestSummary);
 
-  // Attendance Toggle (Yes / No)
+  // Attendance Toggle
   attendanceRadios.forEach(radio => {
     radio.addEventListener('change', () => {
       const isAttending = radio.value === 'yes';
@@ -128,9 +254,7 @@ function initRSVPForm() {
   function updateGuestSummary() {
     const isAttending = form.querySelector('input[name="attending"]:checked')?.value === 'yes';
     if (!isAttending) {
-      if (totalSummaryPill) {
-        totalSummaryPill.textContent = 'Not attending';
-      }
+      if (totalSummaryPill) totalSummaryPill.textContent = 'Not attending';
       return;
     }
 
@@ -148,7 +272,7 @@ function initRSVPForm() {
 
   updateGuestSummary();
 
-  // Reset form handler to submit another or make changes
+  // Reset form handler
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
       successCard.classList.remove('active');
@@ -182,9 +306,9 @@ function initRSVPForm() {
     const phone = form.querySelector('#guest-phone')?.value.trim();
     const message = form.querySelector('#guest-message')?.value.trim();
 
-    // Client Validation
+    // Validation
     if (!name) {
-      showError('Please enter your name.');
+      showError('Please enter your name / family name.');
       form.querySelector('#guest-name')?.focus();
       return;
     }
@@ -194,7 +318,6 @@ function initRSVPForm() {
       return;
     }
 
-    // Lock submission button
     isSubmitting = true;
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
@@ -220,7 +343,10 @@ function initRSVPForm() {
         throw new Error(result.error || 'Unable to submit RSVP. Please try again.');
       }
 
-      // Success!
+      // Celebratory Effects: Sound & Confetti
+      if (window.PartyMusic && window.PartyMusic.playPopperSFX) {
+        window.PartyMusic.playPopperSFX();
+      }
       if (window.PartyConfetti) {
         window.PartyConfetti.celebrate();
       }

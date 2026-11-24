@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Party RSVP — Dharv Pratap & Mysha's Birthday Celebration</title>
-  <meta name="description" content="You're invited to a Movie Party! Celebrate Dharv Pratap turning 6 & Mysha turning 9 at PVR Cinemas, Forum Nexus Mall. RSVP here!">
-  
-  <!-- Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Movie Party RSVP — Dharv Pratap &amp; Mysha's Birthday Celebration</title>
+  <meta name="description" content="You're invited to a Kids' Movie Party! Celebrate Dharv Pratap turning 6 & Mysha turning 9 at PVR Cinemas, Forum Nexus Mall. Slide, popcorn & movie fun! RSVP here.">
+  <meta name="theme-color" content="#1e0d47">
+
+  <!-- Open Graph for WhatsApp & Social Media Preview Cards -->
+  <meta property="og:title" content="🎬 Movie Party: Dharv & Mysha's Birthday Celebration!">
+  <meta property="og:description" content="Two birthdays, one big screen, in-theatre slide, and all the popcorn you can eat at PVR Cinemas, Forum Nexus Mall! RSVP online now.">
+  <meta property="og:type" content="website">
+
+  <!-- Cheerful Google Fonts: Fredoka & Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
@@ -17,23 +23,61 @@
 </head>
 <body>
 
-  <!-- Top Scrolling Marquee Band -->
+  <!-- Floating Sky Animations: Popcorn, Balloons, Stars -->
+  <div class="sky-decorations" aria-hidden="true">
+    <div class="floating-icon float-1">🍿</div>
+    <div class="floating-icon float-2">🎈</div>
+    <div class="floating-icon float-3">⭐</div>
+    <div class="floating-icon float-4">🎬</div>
+    <div class="floating-icon float-5">🎂</div>
+  </div>
+
+  <!-- FLOATING MOBILE / DESKTOP INTERACTIVE TOOLBAR -->
+  <nav class="floating-action-bar" aria-label="Interactive Controls">
+    <button type="button" id="btn-toggle-music" class="bar-btn music-btn" aria-label="Play or pause birthday music">
+      <span class="music-icon" aria-hidden="true">🎵</span>
+      <span class="btn-label" id="music-btn-label">Music: OFF</span>
+      <span class="sound-wave" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+
+    <button type="button" id="btn-party-popper" class="bar-btn popper-btn" aria-label="Launch celebratory confetti popper">
+      <span aria-hidden="true">🎉</span>
+      <span class="btn-label">Popper!</span>
+    </button>
+
+    <a href="#rsvp" class="bar-btn rsvp-jump-btn" aria-label="Jump directly to RSVP form">
+      <span aria-hidden="true">🎟️</span>
+      <span class="btn-label">RSVP Now</span>
+    </a>
+
+    <button type="button" id="btn-share-invite" class="bar-btn share-btn" aria-label="Share invitation on WhatsApp or other apps">
+      <span aria-hidden="true">📲</span>
+      <span class="btn-label">Share</span>
+    </button>
+  </nav>
+
+  <!-- TOP SCROLLING MARQUEE BAND -->
   <aside class="marquee-bar" aria-label="Cinema Marquee Announcements">
-    <div class="marquee-track" aria-hidden="true">
-      <div class="marquee-item"><span class="marquee-star">★</span> NOW SHOWING: DHARV & MYSHA'S MOVIE PARTY <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> PVR CINEMAS • FORUM NEXUS MALL <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> TWO BIRTHDAYS • ONE BIG SCREEN <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> ALL THE POPCORN YOU CAN EAT <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> NOW SHOWING: DHARV & MYSHA'S MOVIE PARTY <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> PVR CINEMAS • FORUM NEXUS MALL <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> TWO BIRTHDAYS • ONE BIG SCREEN <span class="marquee-star">★</span></div>
-      <div class="marquee-item"><span class="marquee-star">★</span> ALL THE POPCORN YOU CAN EAT <span class="marquee-star">★</span></div>
+    <div class="marquee-inner">
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item"><span class="marquee-star">★</span> NOW SHOWING: DHARV &amp; MYSHA'S MOVIE PARTY <span class="marquee-star">★</span></div>
+        <div class="marquee-item">🍿 SLIDE &amp; POPCORN FUN <span class="marquee-star">★</span></div>
+        <div class="marquee-item">📍 PVR CINEMAS • FORUM NEXUS MALL <span class="marquee-star">★</span></div>
+        <div class="marquee-item">🎉 TWO BIRTHDAYS • ONE BIG SCREEN <span class="marquee-star">★</span></div>
+        <div class="marquee-item"><span class="marquee-star">★</span> NOW SHOWING: DHARV &amp; MYSHA'S MOVIE PARTY <span class="marquee-star">★</span></div>
+        <div class="marquee-item">🍿 SLIDE &amp; POPCORN FUN <span class="marquee-star">★</span></div>
+        <div class="marquee-item">📍 PVR CINEMAS • FORUM NEXUS MALL <span class="marquee-star">★</span></div>
+        <div class="marquee-item">🎉 TWO BIRTHDAYS • ONE BIG SCREEN <span class="marquee-star">★</span></div>
+      </div>
     </div>
   </aside>
 
+  <!-- MAIN WRAPPER -->
   <main class="page-wrapper">
     
-    <!-- Top Filmstrip Accent Decoration -->
+    <!-- Top Filmstrip Accent -->
     <div class="film-strip-edge" aria-hidden="true">
       <div class="film-holes">
         <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
@@ -45,6 +89,9 @@
     <!-- MAIN TICKET CARD -->
     <article class="ticket-container" aria-label="Birthday Party Movie Ticket Invitation">
       
+      <!-- Carnival Ribbon Accent -->
+      <div class="ticket-carnival-strip" aria-hidden="true"></div>
+
       <!-- Ticket Top / Header Band -->
       <header class="ticket-top-band">
         <div class="ticket-kicker">
@@ -54,7 +101,7 @@
         </div>
         
         <h1 class="ticket-title">
-          You're invited to a <span class="highlight">MOVIE PARTY</span>
+          You're invited to a <br><span class="highlight">MOVIE PARTY</span>
         </h1>
         
         <p class="ticket-tagline">
@@ -62,7 +109,7 @@
         </p>
 
         <div class="emoji-reel" aria-hidden="true">
-          🎬 🍿 🎂 🎈
+          🎬 🍿 🎂 🎈 🛝 ✨
         </div>
       </header>
 
@@ -77,30 +124,55 @@
           
           <div class="stars-grid">
             
-            <!-- Dharv Pratap (Turning 6 - Blue) -->
+            <!-- Dharv Pratap (Turning 6 - Blue Superhero Cinema) -->
             <div class="star-card dharv" id="star-dharv">
-              <div class="card-glow" aria-hidden="true"></div>
               <div class="star-badge-ribbon">Birthday Boy</div>
               <div class="star-number-badge" aria-label="Turning age 6">
                 <span class="star-age-num">6</span>
               </div>
               <h2 class="star-card-name">Dharv Pratap</h2>
               <p class="star-card-role">Birthday Boy</p>
-              <p class="star-card-turning">Turning 6</p>
+              <div class="star-card-turning">Turning 6</div>
             </div>
 
-            <!-- Mysha (Turning 9 - Pink) -->
+            <!-- Mysha (Turning 9 - Pink Starlet Cinema) -->
             <div class="star-card mysha" id="star-mysha">
-              <div class="card-glow" aria-hidden="true"></div>
               <div class="star-badge-ribbon">Birthday Girl</div>
               <div class="star-number-badge" aria-label="Turning age 9">
                 <span class="star-age-num">9</span>
               </div>
               <h2 class="star-card-name">Mysha</h2>
               <p class="star-card-role">Birthday Girl</p>
-              <p class="star-card-turning">Turning 9</p>
+              <div class="star-card-turning">Turning 9</div>
             </div>
 
+          </div>
+        </section>
+
+        <!-- PVR PLAYHOUSE THEATRE HIGHLIGHT -->
+        <section class="playhouse-feature-banner" aria-label="PVR Playhouse Features">
+          <div class="playhouse-tag">⭐ SPECIAL KIDS' AUDITORIUM ⭐</div>
+          <h2 class="playhouse-heading">PVR Playhouse Experience!</h2>
+          <p class="playhouse-desc">
+            Get ready for the coolest movie experience in town! An auditorium built specially for kids featuring the <strong>giant in-theatre tube slide</strong>, rainbow seats, cartoon murals, and all the popcorn you can eat!
+          </p>
+          <div class="playhouse-perks-grid">
+            <div class="perk-item">
+              <span class="perk-icon" aria-hidden="true">🛝</span>
+              <span class="perk-text">Giant In-Audi Slide</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-icon" aria-hidden="true">🍿</span>
+              <span class="perk-text">Endless Warm Popcorn</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-icon" aria-hidden="true">🎬</span>
+              <span class="perk-text">Private Big Screen Show</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-icon" aria-hidden="true">🎂</span>
+              <span class="perk-text">Cake &amp; Birthday Fun</span>
+            </div>
           </div>
         </section>
 
@@ -114,27 +186,62 @@
               <div class="detail-content">
                 <div class="detail-label">Date</div>
                 <time datetime="2026-12-10" class="detail-value">Thursday, 10 December 2026</time>
-                <div class="detail-sub">Mark your calendar!</div>
+                <div class="detail-sub">Mark your calendar for showtime!</div>
               </div>
             </div>
 
-            <!-- Time -->
+            <!-- Time (With Add to Calendar) -->
             <div class="detail-item">
               <div class="detail-icon-wrap" aria-hidden="true">⏰</div>
               <div class="detail-content">
                 <div class="detail-label">Time</div>
                 <div class="detail-value">4:30 – 7:30 PM</div>
-                <div class="detail-sub">(Evening show)</div>
+                <div class="detail-sub">(Evening show with movie &amp; party)</div>
+                <div class="calendar-actions">
+                  <a 
+                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%F0%9F%8E%AC+Dharv+%26+Mysha%27s+Birthday+Movie+Party!+%F0%9F%8D%BF&dates=20261210T110000Z/20261210T140000Z&details=Two+birthdays%2C+one+big+screen%2C+in-theatre+slide%2C+and+all+the+popcorn+you+can+eat!+Celebrating+Dharv+(6)+and+Mysha+(9)+at+PVR+Playhouse.+Parents%2C+please+join+us!&location=PVR+Cinemas+(Playhouse)%2C+4th+Floor%2C+Nexus+Koramangala+Mall%2C+21+Hosur+Rd%2C+Bengaluru%2C+Karnataka+560095" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn-cal-link google"
+                    aria-label="Add to Google Calendar"
+                  >
+                    <span aria-hidden="true">📅</span>
+                    <span>Google Cal</span>
+                  </a>
+                  <a 
+                    href="/api/party.ics" 
+                    download="dharv-mysha-movie-party.ics" 
+                    class="btn-cal-link apple"
+                    aria-label="Download Apple or Outlook iCal file"
+                  >
+                    <span aria-hidden="true">🍏</span>
+                    <span>Apple / iCal</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <!-- Venue -->
+            <!-- Venue (With Full Address & Direct Google Maps Redirect) -->
             <div class="detail-item">
               <div class="detail-icon-wrap" aria-hidden="true">📍</div>
               <div class="detail-content">
                 <div class="detail-label">Venue</div>
-                <div class="detail-value">PVR Cinemas, Forum Nexus Mall</div>
-                <div class="detail-sub">Audi with big screen & private party hall</div>
+                <div class="detail-value">PVR Cinemas (Playhouse), Forum Nexus Mall</div>
+                <a 
+                  href="https://maps.app.goo.gl/pjCYpurdFAuU8U3UA" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="venue-address-link"
+                  aria-label="Click to open full address on Google Maps"
+                >
+                  <p class="venue-full-address">
+                    4th Floor, Nexus Mall Koramangala (formerly The Forum Mall), 21 Hosur Rd, Chikku Lakshmaiah Layout, Koramangala, Bengaluru, Karnataka 560095
+                  </p>
+                  <span class="btn-maps-link">
+                    <span aria-hidden="true">🗺️</span>
+                    <span>Open in Google Maps ↗</span>
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -143,8 +250,9 @@
               <div class="detail-icon-wrap" aria-hidden="true">🍿</div>
               <div class="detail-content">
                 <div class="detail-label">Fun Includes</div>
-                <div class="detail-value">Slide & popcorn</div>
+                <div class="detail-value">Slide &amp; popcorn</div>
                 <div class="detail-sub">A fun-filled kids' movie theatre experience!</div>
+                <span class="fun-pill-tag">✨ In-Theatre Slide + Endless Popcorn ✨</span>
               </div>
             </div>
 
@@ -201,7 +309,7 @@
         <section class="ticket-stub" aria-label="Ticket Stub">
           <div class="stub-admit-badge">Admit: The Whole Family</div>
           <p class="stub-reminder">
-            Please let us know if you can join our movie party by filling out the RSVP below!
+            Please let us know if you can join our movie party by filling out your RSVP below!
           </p>
         </section>
 
@@ -209,7 +317,7 @@
         <section class="rsvp-section" id="rsvp" aria-label="RSVP Form">
           <div class="rsvp-header">
             <h2 class="rsvp-title">RSVP for the Movie Party</h2>
-            <p class="rsvp-sub">Please confirm your attendance so we can reserve enough popcorn and seats!</p>
+            <p class="rsvp-sub">Confirm your family's attendance so we can reserve enough popcorn and seats!</p>
           </div>
 
           <!-- Alert / Feedback Banner -->
@@ -332,7 +440,7 @@
             <!-- Message / Wishes (Optional) -->
             <div class="form-group">
               <label for="guest-message" class="form-label">
-                Birthday Wishes for Dharv & Mysha <span style="font-weight: 400; color: #6b7280;">(Optional)</span>
+                Birthday Wishes for Dharv &amp; Mysha <span style="font-weight: 400; color: #6b7280;">(Optional)</span>
               </label>
               <textarea 
                 id="guest-message" 
@@ -369,7 +477,7 @@
       </div>
     </article>
 
-    <!-- Bottom Filmstrip Accent Decoration -->
+    <!-- Bottom Filmstrip Accent -->
     <div class="film-strip-edge" style="margin-top: 8px;" aria-hidden="true">
       <div class="film-holes">
         <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
@@ -378,7 +486,7 @@
       </div>
     </div>
 
-    <!-- Print Option -->
+    <!-- Print & Share Actions -->
     <div class="page-actions">
       <button type="button" id="btn-print-invite" class="btn-print" aria-label="Print or save this invitation as a PDF">
         <span aria-hidden="true">🖨️</span>
@@ -393,7 +501,23 @@
 
   </main>
 
+  <!-- FLOATING BIRTHDAY WISHES AT THE BOTTOM OF THE SCREEN -->
+  <aside class="floating-wishes-bar" id="floating-wishes-bar" aria-label="Live Floating Wishes">
+    <div class="wishes-badge">
+      <span class="wishes-heart-icon" aria-hidden="true">💌</span>
+      <span>Wishes Wall:</span>
+    </div>
+    <div class="wishes-scroll-container">
+      <div class="wishes-marquee-track" id="wishes-marquee-track">
+        <div class="wish-item">
+          <span class="wish-author">Loading sweet wishes...</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <!-- Scripts -->
+  <script src="js/music.js"></script>
   <script src="js/confetti.js"></script>
   <script src="js/invite.js"></script>
 </body>

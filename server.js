@@ -92,6 +92,49 @@ app.get('/api/event-info', (req, res) => {
   });
 });
 
+// Public Wishes Endpoint for Floating Marquee
+app.get('/api/wishes', (req, res) => {
+  try {
+    const dbWishes = db.getPublicWishes() || [];
+    // Cheerful default starter wishes to display immediately
+    const starterWishes = [
+      { name: "Vivaan", message: "Can't wait to slide and watch the movie with Dharv! 🛝🍿" },
+      { name: "Ananya & Family", message: "Happy 9th Birthday Mysha! We are so excited! 🎈✨" },
+      { name: "Kabir", message: "Happy 6th Birthday Dharv! You are our superhero! ⚡🎬" },
+      { name: "Advik & Tanya", message: "Popcorn and big screen movies! Best party ever! 🍿🎂" }
+    ];
+    res.json({ wishes: dbWishes.length > 0 ? dbWishes : starterWishes });
+  } catch (err) {
+    res.json({ wishes: [] });
+  }
+});
+
+// Dynamic iCal (.ics) Calendar Download
+app.get('/api/party.ics', (req, res) => {
+  const icsData = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Dharv & Mysha Birthday Party//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:dharv-mysha-movie-party-2026@pvrplayhouse',
+    'DTSTAMP:20261124T000000Z',
+    'DTSTART:20261210T110000Z', // 4:30 PM IST = 11:00 UTC
+    'DTEND:20261210T140000Z',   // 7:30 PM IST = 14:00 UTC
+    'SUMMARY:🎬 Dharv & Mysha Birthday Movie Party! 🍿',
+    'DESCRIPTION:Two birthdays, one big screen, in-theatre slide, and all the popcorn you can eat! Celebrating Dharv (6) and Mysha (9) at PVR Playhouse. Grown-ups are welcome too!',
+    'LOCATION:PVR Cinemas (Playhouse), 4th Floor, Nexus Koramangala Mall, 21 Hosur Rd, Bengaluru, Karnataka 560095',
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="dharv-mysha-movie-party.ics"');
+  res.send(icsData);
+});
+
 // Recent submission deduplication cache: name+phone -> timestamp
 const recentSubmissions = new Map();
 

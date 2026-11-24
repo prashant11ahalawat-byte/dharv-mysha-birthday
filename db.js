@@ -125,6 +125,22 @@ function getAllRSVPs() {
   }
 }
 
+function getPublicWishes() {
+  getDB();
+  const sql = `
+    SELECT name, message, created_at
+    FROM rsvps
+    WHERE message IS NOT NULL AND TRIM(message) != ''
+    ORDER BY id DESC
+    LIMIT 50
+  `;
+  if (adapter === 'better-sqlite3') {
+    return dbInstance.prepare(sql).all();
+  } else {
+    return dbInstance.prepare(sql).all();
+  }
+}
+
 function getSummaryMetrics() {
   getDB();
   let rows;
@@ -182,6 +198,7 @@ module.exports = {
   getDB,
   addRSVP,
   getAllRSVPs,
+  getPublicWishes,
   getSummaryMetrics,
   deleteRSVP
 };
