@@ -339,7 +339,7 @@
   <div class="invite-card" id="digital-card">
     
     <header class="card-header">
-      <div class="card-kicker">🎬 SPECIAL PREMIERE INVITATION 🍿</div>
+      <div class="card-kicker">🔔 MOVIE PARTY REMINDER • SHOWTIME SOON 🍿</div>
       <h1 class="card-title">You're invited to a <br><span>MOVIE PARTY</span></h1>
       <p class="card-tagline">"Two birthdays, one big screen, and all the popcorn you can eat. Come celebrate with us!"</p>
     </header>
@@ -411,9 +411,12 @@
 
     </div>
 
-    <!-- Stub Footer -->
-    <footer class="card-footer">
-      <p class="rsvp-cta" style="font-size: 1.1rem; color: #ffd43f; font-weight: 700;">🍿 Please RSVP online to reserve your seats &amp; popcorn! 🎟️</p>
+    <!-- Stub Footer / Reminder Banner -->
+    <footer class="card-footer" style="background: #fef08a; border-top: 3px dashed #ca8a04; color: #854d0e; padding: 18px 16px;">
+      <div style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; font-weight: 800; color: #854d0e; margin-bottom: 4px;">
+        🔔 REMINDER: Please make sure to RSVP on the shared link!
+      </div>
+      <p style="font-size: 0.95rem; color: #1e1534; font-weight: 600;">Reserve your family's seats &amp; popcorn buckets 🍿🎟️</p>
     </footer>
 
   </div>
@@ -424,10 +427,13 @@
 
     btnCopy.addEventListener('click', async () => {
       const liveUrl = window.location.origin;
-      const text = `🎬✨ *YOU'RE INVITED TO A MOVIE PARTY!* 🍿🎉
+      const text = `🔔🍿 *MOVIE PARTY REMINDER!* 🎬✨
 
-Two birthdays, one big screen, in-theatre slide, and all the popcorn you can eat! Come celebrate with us:
+Hey everyone! Just a friendly reminder to *make sure to RSVP on the shared link below* so we can reserve your family's seats and popcorn buckets:
 
+👉 ${liveUrl}
+
+Celebrating:
 🌟 *Dharv Pratap* — Turning *6* (Birthday Boy)
 🌟 *Mysha* — Turning *9* (Birthday Girl)
 
@@ -440,7 +446,7 @@ Two birthdays, one big screen, in-theatre slide, and all the popcorn you can eat
 👨‍👩‍👧‍👦 *Parents, please join us!*
 Grown-ups are welcome too — bring the whole family and make it a movie night to remember!
 
-🎟️ *Please RSVP here (Seat & Popcorn reservation):*
+🎟️ *Click here to submit your RSVP:*
 👉 ${liveUrl}
 
 _Made with ♥ for Mysha & Dharv_`;

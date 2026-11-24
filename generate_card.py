@@ -122,12 +122,12 @@ def create_super_card():
         draw.rectangle([(ticket_left + 4 + i * cw, ticket_top + 4), (ticket_left + 4 + (i + 1) * cw, ticket_top + 16)], fill=c)
 
     # Kicker Ribbon
-    ribbon_w = 460
+    ribbon_w = 540
     ribbon_h = 36
     rx1 = (width - ribbon_w) // 2
     ry1 = ticket_top + 30
     draw.rounded_rectangle([(rx1, ry1), (rx1 + ribbon_w, ry1 + ribbon_h)], radius=18, fill='#401878', outline='#ffc21a', width=2)
-    draw.text((width // 2, ry1 + 18), "🎬  SPECIAL PREMIERE INVITATION  🍿", fill='#ffd54f', font=font_kicker, anchor='mm')
+    draw.text((width // 2, ry1 + 18), "🔔  MOVIE PARTY REMINDER • SHOWTIME SOON  🍿", fill='#ffd54f', font=font_kicker, anchor='mm')
 
     # "YOU'RE INVITED TO A"
     draw.text((width // 2, ticket_top + 98), "YOU'RE INVITED TO A", fill='#ffffff', font=font_sub_kicker, anchor='mm')
@@ -271,18 +271,19 @@ def create_super_card():
     draw.ellipse([ticket_left - 16, tear_y - 18, ticket_left + 18, tear_y + 18], fill='#0d0622')
     draw.ellipse([ticket_right - 18, tear_y - 18, ticket_right + 16, tear_y + 18], fill='#0d0622')
 
-    # 10. Ticket Stub Footer
+    # 10. Ticket Stub / Reminder Banner
     stub_top = tear_y + 12
-    stub_h = 95
+    stub_h = 100
     draw.rounded_rectangle(
         [(ticket_left + 18, stub_top), (ticket_right - 18, stub_top + stub_h)],
         radius=16,
-        fill='#200a45',
-        outline='#ffc21a',
+        fill='#fef08a',
+        outline='#ca8a04',
         width=3
     )
-    draw.text((width // 2, stub_top + 35), "🍿 PLEASE RSVP ONLINE FOR SEATS & POPCORN! 🎟️", fill='#ffd43f', font=font_badge_title, anchor='mm')
-    draw.text((width // 2, stub_top + 70), "Made with ♥ for Mysha & Dharv Pratap", fill='#ffffff', font=font_stub_sub, anchor='mm')
+    draw.text((width // 2, stub_top + 28), "🔔  PARTY REMINDER  🔔", fill='#854d0e', font=font_badge_title, anchor='mm')
+    draw.text((width // 2, stub_top + 58), "Make sure to RSVP on the shared link!", fill='#1e1534', font=font_detail_val, anchor='mm')
+    draw.text((width // 2, stub_top + 84), "Reserve your family's seats & popcorn! • Made with ♥ for Mysha & Dharv", fill='#713f12', font=font_star_sub, anchor='mm')
 
     # Save to public and artifact folders
     out_path = os.path.abspath('public/invitation-card.png')
