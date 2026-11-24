@@ -367,6 +367,11 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+// Digital Invitation Card Preview
+app.get('/card', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'card.html'));
+});
+
 // Serve static frontend assets
 app.use(express.static(path.join(__dirname, 'public')));
 
